@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Totally Not a Scam</title>
+<style>
+body {
+margin: 0;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+font-family: "Comic Sans MS", cursive, sans-serif;
+text-align: center;
+color: #fff;
+overflow: hidden;
+}
+
+.card {
+background: rgba(255, 255, 255, 0.2);
+padding: 40px;
+border-radius: 20px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+z-index: 2;
+}
+
+button {
+font-size: 1.1rem;
+padding: 12px 24px;
+margin: 10px;
+border: none;
+border-radius: 30px;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+button:hover {
+transform: scale(1.1);
+}
+
+.yes {
+background-color: #ff4d6d;
+color: white;
+}
+
+.no {
+background-color: #fff;
+color: #ff4d6d;
+position: relative;
+}
+
+img {
+max-width: 260px;
+margin-top: 20px;
+border-radius: 15px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* 🌹 Falling petals */
+.petal {
+position: fixed;
+top: -50px;
+font-size: 24px;
+animation: fall linear infinite;
+pointer-events: none;
+z-index: 1;
+}
+
+@keyframes fall {
+to {
+transform: translateY(110vh) rotate(360deg);
+}
+}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Monali 💖</h1>
+<p>Will you be my Valentine?</p>
+<button class="yes" onclick="yesClicked()">Yes 💕</button>
+<button class="no" onmouseover="moveNo()">No 🙈</button>
+</div>
+
+<!-- 🐱 Meow sound -->
+<audio id="meowSound">
+<source src="https://www.soundjay.com/animal/cat-meow-2.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function yesClicked() {
+document.getElementById("meowSound").play();
+startPetals();
+
+document.body.innerHTML += `
+<div style="
+position:fixed;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background: linear-gradient(135deg, #ff758c, #ff7eb3);
+color:white;
+font-family:'Comic Sans MS', cursive;
+text-align:center;
+z-index:2;
+">
+<h1>Yay!!! 🥰</h1>
+<p style="font-size:1.5rem;">This cat brought you a rose 🌹</p>
+
+<!-- 🐱 ACTUAL CAT -->
+<img
+src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80"
+alt="Cute cat holding a rose"
+/>
+
+<p style="margin-top:20px; font-size:1.3rem;">
+You just made my Valentine’s Day ❤️
+</p>
+</div>
+`;
+}
+
+function moveNo() {
+const button = document.querySelector(".no");
+button.style.position = "absolute";
+button.style.left = Math.random() * (window.innerWidth - 100) + "px";
+button.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+
+function startPetals() {
+setInterval(() => {
+const petal = document.createElement("div");
+petal.className = "petal";
+petal.innerText = "🌹";
+petal.style.left = Math.random() * window.innerWidth + "px";
+petal.style.animationDuration = (3 + Math.random() * 5) + "s";
+document.body.appendChild(petal);
+
+setTimeout(() => petal.remove(), 8000);
+}, 300);
+}
+</script>
+</body>
+</html>
